@@ -11,9 +11,9 @@ import controlador.Conexion;
 
 public class ClienteDAO {
 	
-	Conexion cnn=new Conexion();
-	Connection con=cnn.Conecta();
-	PreparedStatement ps=null;
+	static Conexion cnn=new Conexion();
+	static Connection con=cnn.Conecta();
+	static PreparedStatement ps=null;
 	ResultSet res=null;
 	
 	public boolean Inserta_Cliente(ClienteDTO cli) {
@@ -53,5 +53,18 @@ public class ClienteDAO {
 		}
 		return cli;
 	}
+	
+	public static boolean Eliminar_cliente(int cedula) {
+		boolean resul=false;
+		try {
+			String sql="delete from usuarios where cedula_cliente=?";
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, cedula);
+			resul=ps.executeUpdate()>0;
+			}catch(SQLException ex) {
+				JOptionPane.showMessageDialog(null,"error al eliminar: "+ex);
+				}
+		return resul;
+		}
  
 }

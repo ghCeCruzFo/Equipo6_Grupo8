@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 
 import Modelo.ClienteDAO;
 import Modelo.ClienteDTO;
+import Modelo.UsuarioDAO;
 
 /**
  * Servlet implementation class Cliente
@@ -68,6 +69,25 @@ public class Cliente extends HttpServlet {
 				    }
 	       
 	            }
+				
+ 				if(request.getParameter("eliminar")!=null) {         
+ 				    int cedula; 
+ 				    cedula = Integer.parseInt(request.getParameter("cedula"));
+ 				    int op=JOptionPane.showConfirmDialog(null, "Desea eliminar el cliente con cedula : "+cedula); 
+ 				    if(op==0) {
+ 				    	if(UsuarioDAO.Eliminar_usuario(cedula)) { 
+ 				                response.sendRedirect("Cliente.jsp?men=Cliente eliminado"); 
+ 				            }else { 
+ 				                response.sendRedirect("Cliente.jsp?men=El cliente no se eliminó"); 
+ 				            } 
+ 				            }else if (op==1){ 
+ 				                response.sendRedirect("Cliente.jsp?men=El cliente no se eliminó");
+
+ 				                } else {
+ 				                	response.sendRedirect("Cliente.jsp");             
+ 				                	}         
+ 				    }
+
            }			
 				
      }

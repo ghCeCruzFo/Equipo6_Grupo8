@@ -83,7 +83,7 @@ public class Usuarios extends HttpServlet {
  				                response.sendRedirect("Usuario.jsp?men=El usuario no se eliminó");
 
  				                } else {
- 				                	response.sendRedirect("Libros.jsp");             
+ 				                	response.sendRedirect("Usuario.jsp");             
  				                	}         
  				    }
 
