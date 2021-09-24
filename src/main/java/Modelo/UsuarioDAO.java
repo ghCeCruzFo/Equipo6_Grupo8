@@ -11,9 +11,9 @@ import controlador.Conexion;
 
 public class UsuarioDAO {
 	
-	Conexion cnn=new Conexion();
-	Connection con=cnn.Conecta();
-	PreparedStatement ps=null;
+	static Conexion cnn=new Conexion();
+	static Connection con=cnn.Conecta();
+	static PreparedStatement ps=null;
 	ResultSet res=null;
 	
 	public boolean Inserta_Usuario(UsuarioDTO usu) {
@@ -52,5 +52,18 @@ public UsuarioDTO Buscar_Usuario(int cedula) {
 		}
 		return usu;
 	}
- 
-}
+
+	public static boolean Eliminar_usuario(int identificacion) {
+		boolean resul=false;
+		try {
+			String sql="delete from usuarios where cedula_usuario=?";
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, identificacion);
+			resul=ps.executeUpdate()>0;
+			}catch(SQLException ex) {
+				JOptionPane.showMessageDialog(null,"error al eliminar: "+ex);
+				}
+		return resul;
+		}
+	
+	}

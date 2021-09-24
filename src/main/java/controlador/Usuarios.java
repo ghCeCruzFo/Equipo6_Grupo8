@@ -66,9 +66,28 @@ public class Usuarios extends HttpServlet {
 					response.sendRedirect("Usuario.jsp?identificacion="+identificacion+"&&email="+email+"&&pasword="+pasword+"&&usuario="+usuario+"&&nombre="+nombre);
 					}else {
 					response.sendRedirect("Usuario.jsp?men=El Usuario no se encontro.");
-				    }
-	       
+				    }       
 	            }
+ 				
+ 				if(request.getParameter("eliminar")!=null) {         
+ 				    int identificacion; 
+ 				    identificacion = Integer.parseInt(request.getParameter("identificacion"));
+ 				    int op=JOptionPane.showConfirmDialog(null, "Desea eliminar el usuario con cedula : "+identificacion); 
+ 				    if(op==0) {
+ 				    	if(UsuarioDAO.Eliminar_usuario(identificacion)) { 
+ 				                response.sendRedirect("Usuario.jsp?men=Usuario eliminado"); 
+ 				            }else { 
+ 				                response.sendRedirect("Usuario.jsp?men=El usuario no se eliminó"); 
+ 				            } 
+ 				            }else if (op==1){ 
+ 				                response.sendRedirect("Usuario.jsp?men=El usuario no se eliminó");
+
+ 				                } else {
+ 				                	response.sendRedirect("Libros.jsp");             
+ 				                	}         
+ 				    }
+
+ 				
            }			
 				
      }
